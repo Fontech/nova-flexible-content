@@ -1,10 +1,10 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\FileAdder;
+namespace Fontech\NovaFlexibleContent\FileAdder;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\MediaCollections\FileAdderFactory as OriginalFileAdderFactory;
-use Whitecube\NovaFlexibleContent\FileAdder\FileAdder as NewFileAdder;
+use Fontech\NovaFlexibleContent\FileAdder\FileAdder as NewFileAdder;
 
 class FileAdderFactory extends OriginalFileAdderFactory
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Concerns;
+namespace Fontech\NovaFlexibleContent\Concerns;
 
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\MediaRepository;
-use Whitecube\NovaFlexibleContent\FileAdder\FileAdder;
-use Whitecube\NovaFlexibleContent\FileAdder\FileAdderFactory;
-use Whitecube\NovaFlexibleContent\Flexible;
+use Fontech\NovaFlexibleContent\FileAdder\FileAdder;
+use Fontech\NovaFlexibleContent\FileAdder\FileAdderFactory;
+use Fontech\NovaFlexibleContent\Flexible;
 use Spatie\MediaLibrary\HasMedia;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Nova;
 use Illuminate\Support\Collection;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Media;
-use Whitecube\NovaFlexibleContent\Http\ScopedRequest;
+use Fontech\NovaFlexibleContent\Http\ScopedRequest;
 
 trait HasMediaLibrary {
 

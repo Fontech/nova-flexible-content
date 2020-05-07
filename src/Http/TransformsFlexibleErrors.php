@@ -1,9 +1,9 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Http;
+namespace Fontech\NovaFlexibleContent\Http;
 
 use Illuminate\Support\Str;
-use Whitecube\NovaFlexibleContent\Flexible;
+use Fontech\NovaFlexibleContent\Flexible;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -83,7 +83,7 @@ trait TransformsFlexibleErrors
      *
      * @param  array  $messages
      * @param  string $key
-     * @param  \Whitecube\NovaFlexibleContent\Http\FlexibleAttribute  $attribute
+     * @param  \Fontech\NovaFlexibleContent\Http\FlexibleAttribute  $attribute
      * @return array
      */
     protected function transformMessages($messages, $key, $attribute)

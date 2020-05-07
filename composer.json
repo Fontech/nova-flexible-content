@@ -1,5 +1,5 @@
 {
-    "name": "whitecube/nova-flexible-content",
+    "name": "fontech/nova-flexible-content",
     "description": "Flexible Content & Repeater Fields for Laravel Nova.",
     "license": "MIT",
     "keywords": [
@@ -15,6 +15,10 @@
         {
             "name": "Toon Van den Bos",
             "email": "toon@whitecube.be"
+        },
+        {
+            "name": "Fontech",
+            "email": "service@fontech.com.tw"
         }
     ],
     "require": {
@@ -22,13 +26,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Whitecube\\NovaFlexibleContent\\": "src/"
+            "Fontech\\NovaFlexibleContent\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Whitecube\\NovaFlexibleContent\\FieldServiceProvider"
+                "Fontech\\NovaFlexibleContent\\FieldServiceProvider"
             ]
         }
     },

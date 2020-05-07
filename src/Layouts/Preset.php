@@ -1,8 +1,8 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Layouts;
+namespace Fontech\NovaFlexibleContent\Layouts;
 
-use Whitecube\NovaFlexibleContent\Flexible;
+use Fontech\NovaFlexibleContent\Flexible;
 
 abstract class Preset
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Value;
+namespace Fontech\NovaFlexibleContent\Value;
 
 interface ResolverInterface
 {

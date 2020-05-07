@@ -1,12 +1,12 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Layouts;
+namespace Fontech\NovaFlexibleContent\Layouts;
 
 use ArrayAccess;
 use JsonSerializable;
-use Whitecube\NovaFlexibleContent\Http\ScopedRequest;
-use Whitecube\NovaFlexibleContent\Http\FlexibleAttribute;
-use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
+use Fontech\NovaFlexibleContent\Http\ScopedRequest;
+use Fontech\NovaFlexibleContent\Http\FlexibleAttribute;
+use Fontech\NovaFlexibleContent\Concerns\HasFlexible;
 use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 use Illuminate\Database\Eloquent\Concerns\HidesAttributes;
 use Illuminate\Contracts\Support\Arrayable;
@@ -199,7 +199,7 @@ class Layout implements LayoutInterface, JsonSerializable, ArrayAccess, Arrayabl
      * Get an empty cloned instance
      *
      * @param  string  $key
-     * @return \Whitecube\NovaFlexibleContent\Layouts\Layout
+     * @return \Fontech\NovaFlexibleContent\Layouts\Layout
      */
     public function duplicate($key)
     {
@@ -211,7 +211,7 @@ class Layout implements LayoutInterface, JsonSerializable, ArrayAccess, Arrayabl
      *
      * @param  string  $key
      * @param  array  $attributes
-     * @return \Whitecube\NovaFlexibleContent\Layouts\Layout
+     * @return \Fontech\NovaFlexibleContent\Layouts\Layout
      */
     public function duplicateAndHydrate($key, array $attributes = [])
     {
@@ -359,7 +359,7 @@ class Layout implements LayoutInterface, JsonSerializable, ArrayAccess, Arrayabl
      * The default behaviour when removed
      *
      * @param  mixed $group The group
-     * @param  Whitecube\NovaFlexibleContent\Layout $layout
+     * @param  Fontech\NovaFlexibleContent\Layout $layout
      *
      * @return mixed
      */

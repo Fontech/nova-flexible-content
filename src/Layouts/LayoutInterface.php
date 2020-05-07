@@ -1,8 +1,8 @@
 <?php
 
-namespace Whitecube\NovaFlexibleContent\Layouts;
+namespace Fontech\NovaFlexibleContent\Layouts;
 
-use Whitecube\NovaFlexibleContent\Http\ScopedRequest;
+use Fontech\NovaFlexibleContent\Http\ScopedRequest;
 
 interface LayoutInterface
 {
