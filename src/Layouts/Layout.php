@@ -11,12 +11,14 @@ use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 use Illuminate\Database\Eloquent\Concerns\HidesAttributes;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Nova\Metable;
 
 class Layout implements LayoutInterface, JsonSerializable, ArrayAccess, Arrayable
 {
     use HasAttributes;
     use HidesAttributes;
     use HasFlexible;
+    use Metable;
 
     /**
      * The layout's name
@@ -213,19 +215,23 @@ class Layout implements LayoutInterface, JsonSerializable, ArrayAccess, Arrayabl
      * @param  array  $attributes
      * @return \Fontech\NovaFlexibleContent\Layouts\Layout
      */
-    public function duplicateAndHydrate($key, array $attributes = [])
+    public function duplicateAndHydrate($key, array $attributes = [], array $meta = [])
     {
         $fields = array_map(function($field) {
             return clone $field;
         }, $this->fields());
-        
-        return new static(
+
+        $layout = new static(
             $this->title,
             $this->name,
             $fields,
             $key,
             $attributes
         );
+
+        $layout->withMeta($meta);
+
+        return $layout;
     }
 
     /**
@@ -279,7 +285,9 @@ class Layout implements LayoutInterface, JsonSerializable, ArrayAccess, Arrayabl
             // groups use the same layout, the current values will be lost
             // since each group uses the same fields by reference. That's
             // why we need to serialize the field's current state.
-            'attributes' => $this->fields->jsonSerialize()
+            'attributes' => $this->fields->jsonSerialize(),
+
+            'meta' => $this->meta,
         ];
     }
 

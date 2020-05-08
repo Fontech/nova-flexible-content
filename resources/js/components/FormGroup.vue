@@ -1,33 +1,37 @@
 <template>
     <div class="relative flex bg-white mb-4 pb-1" :id="group.key">
-        <div class="z-10 bg-white border-t border-l border-b border-60 h-auto pin-l pin-t rounded-l self-start w-8">
-            <button type="button" class="group-control btn border-r border-40 w-8 h-8 block" title="Expand" @click.prevent="expand" v-if="collapsed">
+        <div class="z-10 bg-white border-t border-l border-b border-60 h-auto pin-l pin-t rounded-l self-start w-8" v-if="showGroupControl">
+            <button type="button" class="group-control btn border-r border-40 w-8 h-8 block" title="Expand" @click.prevent="expand" v-if="collapsible && collapsed">
                 <icon class="align-top" type="plus-square" width="16" height="16" view-box="0 0 24 24" />
             </button>
-            <div v-if="!collapsed">
-                <button type="button" class="group-control btn border-r border-40 w-8 h-8 block" title="Collapse" @click.prevent="collapse">
+            <div v-else>
+                <button type="button" class="group-control btn border-r border-40 w-8 h-8 block" title="Collapse" @click.prevent="collapse" v-if="collapsible">
                     <icon class="align-top" type="minus-square" width="16" height="16" view-box="0 0 24 24" />
                 </button>
                 <div v-if="!readonly">
-                    <button type="button" class="group-control btn border-t border-r border-40 w-8 h-8 block" title="Move up" @click.prevent="moveUp">
-                        <icon type="arrow-up" view-box="0 0 8 4.8" width="10" height="10" />
-                    </button>
-                    <button type="button" class="group-control btn border-t border-r border-40 w-8 h-8 block" title="Move down" @click.prevent="moveDown">
-                        <icon type="arrow-down" view-box="0 0 8 4.8" width="10" height="10" />
-                    </button>
-                    <button type="button" class="group-control btn border-t border-r border-40 w-8 h-8 block" title="Delete" @click.prevent="confirmRemove">
-                        <icon type="delete" view-box="0 0 20 20" width="16" height="16" />
-                    </button>
-                    <portal to="modals">
-                        <delete-flexible-content-group-modal
-                            v-if="removeMessage"
-                            @confirm="remove"
-                            @close="removeMessage=false"
-                            :message="field.confirmRemoveMessage"
-                            :yes="field.confirmRemoveYes"
-                            :no="field.confirmRemoveNo"
-                        />
-                    </portal>
+                    <template v-if="sortable">
+                        <button type="button" class="group-control btn border-r border-40 w-8 h-8 block" title="Move up" @click.prevent="moveUp">
+                            <icon type="arrow-up" view-box="0 0 8 4.8" width="10" height="10" />
+                        </button>
+                        <button type="button" class="group-control btn border-r border-40 w-8 h-8 block" title="Move down" @click.prevent="moveDown">
+                            <icon type="arrow-down" view-box="0 0 8 4.8" width="10" height="10" />
+                        </button>
+                    </template>
+                    <template v-if="removable">
+                        <button type="button" class="group-control btn border-r border-40 w-8 h-8 block" title="Delete" @click.prevent="confirmRemove">
+                            <icon type="delete" view-box="0 0 20 20" width="16" height="16" />
+                        </button>
+                        <portal to="modals">
+                            <delete-flexible-content-group-modal
+                                v-if="removeMessage"
+                                @confirm="remove"
+                                @close="removeMessage=false"
+                                :message="field.confirmRemoveMessage"
+                                :yes="field.confirmRemoveYes"
+                                :no="field.confirmRemoveNo"
+                            />
+                        </portal>
+                    </template>
                 </div>
             </div>
         </div>
@@ -61,19 +65,28 @@ import { BehavesAsPanel } from 'laravel-nova';
 export default {
     mixins: [BehavesAsPanel],
 
-    props: ['errors', 'group', 'field'],
+    props: ['errors', 'group', 'field', 'collapsible', 'sortable'],
 
     data() {
         return {
             removeMessage: false,
             collapsed: this.group.collapsed,
             readonly: this.group.readonly,
+            removable: this.group.meta.removable === undefined ? true : this.group.meta.removable,
         };
     },
 
     computed: {
+        showGroupControl() {
+            return this.collapsible || (!this.readonly && (this.sortable || this.removable))
+        },
         titleStyle() {
             let classes = ['border-t', 'border-r', 'border-60', 'rounded-tr-lg'];
+
+            if (!this.showGroupControl) {
+                classes.push('border-l rounded-tl-lg');
+            }
+
             if (this.collapsed) {
                 classes.push('border-b rounded-br-lg');
             }
@@ -84,6 +97,9 @@ export default {
             if(!this.group.title) {
                 classes.push('border-t');
                 classes.push('rounded-tr-lg');
+            }
+            if (!this.showGroupControl && !this.group.title) {
+                classes.push('rounded-tl-lg');
             }
             if (this.collapsed) {
                 classes.push('hidden');
@@ -152,6 +168,9 @@ export default {
     }
     .group-control:hover path {
         fill: var(--primary);
+    }
+    .group-control + .group-control {
+        border-top-width: 1px;
     }
     .confirm-message{
         position: absolute;

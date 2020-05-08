@@ -75,6 +75,8 @@ class Flexible extends Field
         $this->menu('flexible-drop-menu');
 
         $this->hideFromIndex();
+
+        $this->collapsible(false);
     }
 
     /**
@@ -416,7 +418,7 @@ class Flexible extends Field
             $this->resolver(Resolver::class);
         }
 
-        return $this->groups = $this->resolver->get($resource, $attribute, $this->layouts);
+        return $this->groups = $this->resolver->get($resource, $attribute, $this->layouts, $this->resolveCallback);
     }
 
     /**
@@ -611,5 +613,10 @@ class Flexible extends Field
     public static function getOriginModel()
     {
         return static::$model;
+    }
+
+    public function collapsible(bool $value = true)
+    {
+        $this->withMeta(['collapsible' => $value]);
     }
 }
